@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+interface GameServices {
+    +createGame()
+    +getGameDetails()
+    +getGames()
+    +getAllGenres()
+}
+
+interface PlayerServices {
+    +createPlayer()
+    +getPlayerDetails()
+    +isValidToken()
+    +getPlayerDetailsBy()
+    +login()
+    +logout()
+}
+
+interface SessionServices {
+    +addPlayer()
+    +sessionDetails()
+    +createSession()
+    +getSessions()
+    +updateCapacityOrDate()
+    +removePlayer()
+    +deleteSession()
+    +getPlayerFromSession()
+}
+
+class GameManagement {
+    +createGame()
+    +getGameDetails()
+    +getGames()
+    +getAllGenres()
+    -storage: GameStorageInterface
+}
+
+class PlayerManagement {
+    +createPlayer()
+    +getPlayerDetails()
+    +isValidToken()
+    +getPlayerDetailsBy()
+    +login()
+    +logout()
+    -storage: PlayerStorageInterface
+}
+
+class SessionManagement {
+    +addPlayer()
+    +sessionDetails()
+    +createSession()
+    +getSessions()
+    +updateCapacityOrDate()
+    +removePlayer()
+    +deleteSession()
+    +getPlayerFromSession()
+    -storage: SessionStorageInterface
+}
+
+GameServices <|-- GameManagement
+PlayerServices <|-- PlayerManagement
+SessionServices <|-- SessionManagement
+
+package storage {
+   interface GameStorageInterface
+   interface PlayerStorageInterface
+   interface SessionStorageInterface
+
+}
+
+GameManagement *-- storage.GameStorageInterface : storage
+PlayerManagement *-- storage.PlayerStorageInterface : storage
+SessionManagement *-- storage.SessionStorageInterface : storage
+
+@enduml
