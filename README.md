@@ -23,6 +23,21 @@ by their properties like gid, sid, genre, developer, etc.
 
 # Modeling the database
 
+In this section, we will describe the conceptual and physical models of the database used in the application.
+
+The database is designed to manage game sessions and players. It includes tables for players, games, sessions, and their relationships. The main tables are:
+
+- `PLAYER`: Stores player information such as `pid`, `name`, `username`, `email`, `password`, and `token`.
+- `GAME`: Stores game information such as `gid`, `name`, and `developer`.
+- `SESSION`: Stores session information such as `sid`, `capacity`, `gid`, `date`, and `owner`.
+- `PLAYER_SESSION`: Stores the relationship between players and sessions.
+
+Triggers and functions are used to enforce business rules and maintain data integrity. For example,
+triggers ensure that the session capacity is not exceeded and that players are added to sessions correctly.
+
+The physical model of the database is implemented in PostgreSQL, and the SQL scripts for creating the schema,
+functions, and triggers are provided in the `src/main/sql` directory.
+
 ---
 
 ## Conceptual Model
